@@ -50,7 +50,47 @@ public class Main {
     	              		 System.out.println("Czy wprowadzany kon posiada rodzicow w bazie danych(dla 'tak' wprowadz 1, dla 'nie' 0) ?");
     	              		 int odp = EasyIn.getInt();
     	              		if (odp == 1){
-    	              			System.out.println("OGHOHOHO");
+    	              			try {     
+    	    	              		 query = "INSERT INTO HORSE (NAME, SEX, COLOR, DOB, YEARONLY,DAM,SIRE,BREEDER) VALUES (?,?,?,?,?,?,?,?)";
+    								statement = con.prepareStatement(query);
+    								
+    	    		    			System.out.print("Podaj imie konia do dodania: ");
+    	    		    			String name = EasyIn.getString();
+    	    		    			System.out.print("Podaj id plci konia do dodania(mare=0,stallion=1,gelding=2): ");
+    	    		    			int idsex = EasyIn.getInt();
+    	    		    			System.out.print("Podaj id koloru konia do dodania: ");
+    	    		    			int idcolor = EasyIn.getInt();
+    	    		    			System.out.print("Podaj date urodzenia konia do dodania w formacie RRRR-MM-DD: ");
+    	    		    			String date = EasyIn.getString();
+    	    		    			System.out.print("Podaj czy tylko rok (tak=1, nie=0): ");
+    	    		    			int year  = EasyIn.getInt();
+    	    		    			System.out.print("Podaj id hodowcy konia do dodania: ");
+    	    		    			int breeder = EasyIn.getInt();
+    	    		    			System.out.print("Podaj id matki konia do dodania: ");
+    	    		    			int iddam = EasyIn.getInt();
+    	    		    			System.out.print("Podaj id ojca konia do dodania: ");
+    	    		    			int idsire = EasyIn.getInt();
+    	    		    			
+    	    		    			statement.setString(1, name);
+    	    		    			statement.setInt(2, idsex);
+    	    		    			statement.setInt(3, idcolor);
+    	    		    			statement.setString(4, date);
+    	    		    			statement.setInt(5, year);
+    	    		    			statement.setInt(6, iddam );
+    	    		    			statement.setInt(7,idsire);
+    	    		    			statement.setInt(8, breeder);
+    	    		    			
+    	    		    			if(statement.executeUpdate()>=1)	{
+    	    		    				System.out.println("Dodano konia o danych: Imie: "+name+", Id plci: "+idsex+", Id koloru: "+idcolor+", Data urodzenia "+date+",Czy tylko rok?: "+year+", Id matki: "+iddam+", Id Ojca:"+idsire+",Id hodowcy "+breeder+".");
+    	    		    			} 
+    	    		    			else	{
+    	    		    				System.out.println("Prosze podac poprawne dane!");
+    	    		    			}    	              		 
+
+    	    	              		 
+    	    	              		 } 		catch (SQLException e) {
+    	     	                        e.printStackTrace();
+    	    	              		 }
     	              		}
     	              		else if (odp ==0) {
     	              	
@@ -60,13 +100,13 @@ public class Main {
 							
     		    			System.out.print("Podaj imie konia do dodania: ");
     		    			String name = EasyIn.getString();
-    		    			System.out.print("Podaj id plci konia do dodania: ");
+    		    			System.out.print("Podaj id plci konia do dodania(mare=0,stallion=1,gelding=2): ");
     		    			int idsex = EasyIn.getInt();
     		    			System.out.print("Podaj id koloru konia do dodania: ");
     		    			int idcolor = EasyIn.getInt();
-    		    			System.out.print("Podaj date urodzenia (YYYY-MM-DD) konia do dodania: ");
+    		    			System.out.print("Podaj date urodzenia konia do dodania w formacie RRRR-MM-DD: ");
     		    			String date = EasyIn.getString();
-    		    			System.out.print("Podaj czy tylko rok: ");
+    		    			System.out.print("Podaj czy tylko rok(tak=1, nie=0) : ");
     		    			int year  = EasyIn.getInt();
     		    			System.out.print("Podaj id hodowcy konia do dodania: ");
     		    			int breeder = EasyIn.getInt();
@@ -77,7 +117,7 @@ public class Main {
     		    			statement.setInt(5, year);
     		    			statement.setInt(6, breeder);
     		    			if(statement.executeUpdate()>=1)	{
-    		    				System.out.println("Dodano konia o danych: "+name+", "+idsex+", "+idcolor+", "+date+", "+year+", "+breeder+".");
+    		    				System.out.println("Dodano konia o danych: Imie: "+name+",Id plci: "+idsex+",Id koloru: "+idcolor+",Data urodzenia: "+date+",Czy tylko rok? "+year+", Id hodowcy: "+breeder+".");
     		    			} 
     		    			else	{
     		    				System.out.println("Prosze podac poprawne dane!");
@@ -197,16 +237,93 @@ public class Main {
     	              	int opcja2 = EasyIn.getInt();
     	              	switch(opcja2) {
     	              	 case 1: opcja1String = "Horse";{
-    	              		
-        	              	try {
-        	              		query ="UPDATE HORSE SET NAME=(?), SEX=(?), COLOR=(?), DOB=(?), YEARONLY=(?), DAM=(?), SIRE=(?), BREEDER=(?) WHERE ID=(?)";
+    	              		 System.out.println("Czy edytowany kon posiada rodzicow w bazie danych(dla 'tak' wprowadz 1, dla 'nie' 0) ?");
+    	              		 int odp = EasyIn.getInt();
+    	              		if (odp == 1){
+    	              			try {     
+    	    	              		 query = "UPDATE HORSE SET NAME=(?), SEX=(?), COLOR=(?), DOB=(?), YEARONLY=(?), DAM=(?), SIRE=(?), BREEDER=(?) WHERE ID=(?)";
+    								statement = con.prepareStatement(query);
+    								System.out.println("Podaj id konia do edycji: ");
+    								int id = EasyIn.getInt();
+    							
+    	    		    			System.out.print("Podaj nowe imie konia: ");
+    	    		    			String name = EasyIn.getString();
+    	    		    			System.out.print("Podaj nowe id plci konia(mare=0,stallion=1,gelding=2): ");
+    	    		    			int idsex = EasyIn.getInt();
+    	    		    			System.out.print("Podaj nowe id koloru konia: ");
+    	    		    			int idcolor = EasyIn.getInt();
+    	    		    			System.out.print("Podaj nowa date urodzenia konia  w formacie RRRR-MM-DD: ");
+    	    		    			String date = EasyIn.getString();
+    	    		    			System.out.print("Podaj nowe czy tylko rok (tak=1, nie=0): ");
+    	    		    			int year  = EasyIn.getInt();
+    	    		    			System.out.print("Podaj nowe id hodowcy konia: ");
+    	    		    			int breeder = EasyIn.getInt();
+    	    		    			System.out.print("Podaj nowe id matki konia: ");
+    	    		    			int iddam = EasyIn.getInt();
+    	    		    			System.out.print("Podaj nowe id ojca konia: ");
+    	    		    			int idsire = EasyIn.getInt();
+    	    		    			
+    	    		    			statement.setString(1, name);
+    	    		    			statement.setInt(2, idsex);
+    	    		    			statement.setInt(3, idcolor);
+    	    		    			statement.setString(4, date);
+    	    		    			statement.setInt(5, year);
+    	    		    			statement.setInt(6, iddam );
+    	    		    			statement.setInt(7,idsire);
+    	    		    			statement.setInt(8, breeder);
+    	    		    			statement.setInt(9,id);
+    	    		    			if(statement.executeUpdate()>=1)	{
+    	    		    				System.out.println("Edytowano konia o id: "+id+" Nowe dane to: Imie: "+name+", Id plci: "+idsex+", Id koloru: "+idcolor+", Data urodzenia "+date+",Czy tylko rok?: "+year+", Id matki: "+iddam+", Id Ojca:"+idsire+",Id hodowcy "+breeder+".");
+    	    		    			} 
+    	    		    			else	{
+    	    		    				System.out.println("Prosze podac poprawne dane!");
+    	    		    			}    	              		 
+
+    	    	              		 
+    	    	              		 } 		catch (SQLException e) {
+    	     	                        e.printStackTrace();
+    	    	              		 }
+    	              		}
+    	              		else if (odp ==0) {
+    	              	
+							try {     
+								query = "UPDATE HORSE SET NAME=(?), SEX=(?), COLOR=(?), DOB=(?), YEARONLY=(?), BREEDER=(?) WHERE ID=(?)";
 								statement = con.prepareStatement(query);
-								
-							} catch (SQLException e) {
-							
-								e.printStackTrace();
-							}
-    	              		 break;
+								System.out.println("Podaj id konia do edycji: ");
+								int id = EasyIn.getInt();
+	    		    			System.out.print("Podaj nowe imie konia: ");
+	    		    			String name = EasyIn.getString();
+	    		    			System.out.print("Podaj nowe id plci konia(mare=0,stallion=1,gelding=2): ");
+	    		    			int idsex = EasyIn.getInt();
+	    		    			System.out.print("Podaj nowe id koloru konia: ");
+	    		    			int idcolor = EasyIn.getInt();
+	    		    			System.out.print("Podaj nowa date urodzenia konia  w formacie RRRR-MM-DD: ");
+	    		    			String date = EasyIn.getString();
+	    		    			System.out.print("Podaj nowe czy tylko rok (tak=1, nie=0): ");
+	    		    			int year  = EasyIn.getInt();
+	    		    			System.out.print("Podaj nowe id hodowcy konia: ");
+	    		    			int breeder = EasyIn.getInt();
+
+	    		    			
+	    		    			statement.setString(1, name);
+	    		    			statement.setInt(2, idsex);
+	    		    			statement.setInt(3, idcolor);
+	    		    			statement.setString(4, date);
+	    		    			statement.setInt(5, year);
+	    		    			statement.setInt(6, breeder);
+	    		    			statement.setInt(7,id);
+	    		    			if(statement.executeUpdate()>=1)	{
+	    		    				System.out.println("Edytowano konia o id: "+id+" Nowe dane to: Imie: "+name+", Id plci: "+idsex+", Id koloru: "+idcolor+", Data urodzenia "+date+",Czy tylko rok?: "+year+",Id hodowcy "+breeder+".");
+	    		    			} 
+    		    			else	{
+    		    				System.out.println("Prosze podac poprawne dane!");
+    		    			}    	              		 
+
+    	              		 
+    	              		 } 		catch (SQLException e) {
+     	                        e.printStackTrace();
+    	              		 }
+							}break;
     	              	 }
     	              	case 2: opcja1String = "Breeder";{
     	              	 	try {

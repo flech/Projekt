@@ -6,7 +6,7 @@ public class Breeder {
     private String name;
     private Country country;
 
-    punlic Breeder(long id, String name, Country country) {
+    public Breeder(long id, String name, Country country) {
         this.id = id;
         this.name = name;
         this.country = country;

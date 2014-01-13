@@ -542,7 +542,9 @@ public class Main {
     	            
     	                     break;}
     	            case 5:  opcjaString = "exit";{
+    	            	System.out.println("Shutdown");
     	            	System.exit(0);
+    	            	
     	            
     	            		break;}
     	            default: opcjaString = "Blad";

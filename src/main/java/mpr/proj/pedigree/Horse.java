@@ -30,7 +30,7 @@ public class Horse {
     	return name;
     }
     
-    public void setName(Sex sex) {
+    public void setSex(Sex sex) {
     	this.sex = sex;
     }
 

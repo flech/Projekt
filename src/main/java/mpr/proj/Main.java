@@ -24,12 +24,14 @@ public class Main {
     	System.out.println("Wpisz 1 aby dodać rekord.");
     	System.out.println("Wpisz 2 aby odczytac dane z tabeli.");
     	System.out.println("Wpisz 3 aby uaktualnic rekord.");
-    	System.out.println("Wpisz 4 aby usunac program.");
+    	System.out.println("Wpisz 4 aby usunac rekord.");
       	System.out.println("Wpisz 5 aby Wyjsc.");
       
     		 int opcja = EasyIn.getInt();
     	        String opcjaString; 
     	        String opcja1String;
+    	
+    	        
     	        String query;
     	        PreparedStatement statement;
     
@@ -45,48 +47,46 @@ public class Main {
     	              	
     	              	 switch(opcja1) {
     	              	 case 1: opcja1String = "Horse";{
-    	              		 System.out.println(opcja1String);
-    	              		 	   
+    	              		 System.out.println("Czy wprowadzany kon posiada rodzicow w bazie danych(dla 'tak' wprowadz 1, dla 'nie' 0) ?");
+    	              		 int odp = EasyIn.getInt();
+    	              		if (odp == 1){
+    	              			System.out.println("OGHOHOHO");
+    	              		}
+    	              		else if (odp ==0) {
     	              	
 							try {     
-    	              		 query = "INSERT INTO HORSE (NAME, SEX, COLOR, DOB, YEARONLY, DAM, SIRE, BREEDER) VALUES (?,?,?,?,?,?,?,?)";
+    	              		 query = "INSERT INTO HORSE (NAME, SEX, COLOR, DOB, YEARONLY,BREEDER) VALUES (?,?,?,?,?,?)";
 							statement = con.prepareStatement(query);
 							
-    		    			System.out.print("Podaj imie: ");
-    		    			String godnosc = EasyIn.getString();
-    		    			System.out.print("Podaj id gatunku: ");
-    		    			int plec = EasyIn.getInt();
-    		    			System.out.print("Podaj id koloru: ");
-    		    			int kolor = EasyIn.getInt();
-    		    			System.out.print("Podaj date urodzenia (YYYY-MM-DD): ");
-    		    			String data = EasyIn.getString();
+    		    			System.out.print("Podaj imie konia do dodania: ");
+    		    			String name = EasyIn.getString();
+    		    			System.out.print("Podaj id plci konia do dodania: ");
+    		    			int idsex = EasyIn.getInt();
+    		    			System.out.print("Podaj id koloru konia do dodania: ");
+    		    			int idcolor = EasyIn.getInt();
+    		    			System.out.print("Podaj date urodzenia (YYYY-MM-DD) konia do dodania: ");
+    		    			String date = EasyIn.getString();
     		    			System.out.print("Podaj czy tylko rok: ");
-    		    			int rok = EasyIn.getInt();
-    		    			System.out.print("Podaj id matki: ");
-    		    			int matka = EasyIn.getInt();
-    		    			System.out.print("Podaj id ojca: ");
-    		    			int ojciec = EasyIn.getInt();
-    		    			System.out.print("Podaj id wlasciciela: ");
-    		    			int wlasciciel = EasyIn.getInt();
-    		    			statement.setString(1, godnosc);
-    		    			statement.setInt(2, plec);
-    		    			statement.setInt(3, kolor);
-    		    			statement.setString(4, data);
-    		    			statement.setInt(5, rok);
-    		    			statement.setInt(6, matka);
-    		    			statement.setInt(7, ojciec);
-    		    			statement.setInt(8, wlasciciel);
+    		    			int year  = EasyIn.getInt();
+    		    			System.out.print("Podaj id hodowcy konia do dodania: ");
+    		    			int breeder = EasyIn.getInt();
+    		    			statement.setString(1, name);
+    		    			statement.setInt(2, idsex);
+    		    			statement.setInt(3, idcolor);
+    		    			statement.setString(4, date);
+    		    			statement.setInt(5, year);
+    		    			statement.setInt(6, breeder);
     		    			if(statement.executeUpdate()>=1)	{
-    		    				System.out.println("Dodano wpis "+godnosc+", "+plec+", "+kolor+", "+data+", "+rok+", "+matka+", "+ojciec+", "+wlasciciel+" do tabeli Breeder.");
+    		    				System.out.println("Dodano konia o danych: "+name+", "+idsex+", "+idcolor+", "+date+", "+year+", "+breeder+".");
     		    			} 
     		    			else	{
-    		    				System.out.println("Nie dodano nowego wpisu");
+    		    				System.out.println("Prosze podac poprawne dane!");
     		    			}    	              		 
 
     	              		 
     	              		 } 		catch (SQLException e) {
      	                        e.printStackTrace();
-		
+    	              		 }
 							}break;
 
     	              	 }
@@ -184,14 +184,246 @@ public class Main {
     	              	 
     	              	 
     	              	 
-    	              	 
+    	             
     	                     break;}
     	            case 2:  opcjaString = "Read";
     	                     break;
-    	            case 3:  opcjaString = "Update";
-    	                     break;
-    	            case 4:  opcjaString = "Delete";
-    	                     break;
+    	            case 3:  opcjaString = "Update";{
+    	            	System.out.println("Wpisz 1 aby uaktualnic rekord w tabeli Horse.");
+    	              	System.out.println("Wpisz 2 aby uaktualnic rekord w tabeli Breeder.");
+    	              	System.out.println("Wpisz 3 aby uaktualnic rekord w tabeli Country.");
+    	              	System.out.println("Wpisz 4 aby uaktualnic rekord w tabeli Color.");
+    	              	System.out.println("Wpisz 5 aby uaktualnic rekord w tabeli Sex.");
+    	              	int opcja2 = EasyIn.getInt();
+    	              	switch(opcja2) {
+    	              	 case 1: opcja1String = "Horse";{
+    	              		
+        	              	try {
+        	              		query ="UPDATE HORSE SET NAME=(?), SEX=(?), COLOR=(?), DOB=(?), YEARONLY=(?), DAM=(?), SIRE=(?), BREEDER=(?) WHERE ID=(?)";
+								statement = con.prepareStatement(query);
+								
+							} catch (SQLException e) {
+							
+								e.printStackTrace();
+							}
+    	              		 break;
+    	              	 }
+    	              	case 2: opcja1String = "Breeder";{
+    	              	 	try {
+        	              		query ="UPDATE Breeder SET NAME=(?), COUNTRY=(?) WHERE ID=(?)";
+								statement = con.prepareStatement(query);
+								System.out.println("Podaj ID hodowcy do edycji: ");
+								int id = EasyIn.getInt();
+								System.out.println("Podaj nowa nazwe hodowcy: ");
+								String name = EasyIn.getString();
+								System.out.println("Podaj nowe ID panstwa hodowcy: ");
+								int countryid = EasyIn.getInt();
+								
+								statement.setString(1,name);
+								statement.setInt(2,countryid);
+								statement.setInt(3, id);
+								if(statement.executeUpdate()>=1)	{
+				    				System.out.println("Edytowano hodowce o id "+id+" na imie: "+name+", id panstwa: "+countryid+" .");
+				    			} 
+				    			else	{
+				    				System.out.println("Prosze podac dane do edycji");
+				    			}
+								
+							} catch (SQLException e) {
+							
+								e.printStackTrace();
+							}
+    	              		 break;
+    	              		
+   	              		
+   	              	 }
+    	              	case 3: opcja1String = "Country";{
+    	              		try {
+    	              		query ="UPDATE Country SET NAME=(?), CODE=(?) WHERE ID=(?)";
+							statement = con.prepareStatement(query);
+							System.out.println("Podaj ID panstwa do edycji: ");
+							int id = EasyIn.getInt();
+							System.out.println("Podaj nowa nazwe panstwa: ");
+							String name = EasyIn.getString();
+							System.out.println("Podaj nowe kod kraju: ");
+							String countryid = EasyIn.getString();
+							
+							statement.setString(1,name);
+							statement.setString(2,countryid);
+							statement.setInt(3, id);
+							if(statement.executeUpdate()>=1)	{
+			    				System.out.println("Edytowano panstwo o id "+id+" na nazwe: "+name+", kod panstwa: "+countryid+" .");
+			    			} 
+			    			else	{
+			    				System.out.println("Prosze podac dane do edycji");
+			    			}
+							
+						} catch (SQLException e) {
+						
+							e.printStackTrace();
+						}
+	              		 break;
+   	              	 }
+    	              	case 4: opcja1String = "Color";{
+    	              		try {
+        	              		query ="UPDATE Color SET LNAME=(?), SNAME=(?) WHERE ID=(?)";
+    							statement = con.prepareStatement(query);
+    							System.out.println("Podaj ID koloru do edycji: ");
+    							int id = EasyIn.getInt();
+    							System.out.println("Podaj nowa dluga nazwe koloru: ");
+    							String name = EasyIn.getString();
+    							System.out.println("Podaj nowa krotka nazwe koloru: ");
+    							String sname = EasyIn.getString();
+    							
+    							statement.setString(1,name);
+    							statement.setString(2,sname);
+    							statement.setInt(3, id);
+    							if(statement.executeUpdate()>=1)	{
+    			    				System.out.println("Edytowano kolor o id "+id+" na dluga nazwe: "+name+", krotka nazwe: "+sname+" .");
+    			    			} 
+    			    			else	{
+    			    				System.out.println("Prosze podac dane do edycji");
+    			    			}
+    							
+    						} catch (SQLException e) {
+    						
+    							e.printStackTrace();
+    						}
+    	              		 break;
+   	              	 }
+    	              	case 5: opcja1String = "Sex";{
+    	              		try {
+        	              		query ="UPDATE Sex SET NAME=(?) WHERE ID=(?)";
+    							statement = con.prepareStatement(query);
+    							System.out.println("Podaj ID plci do edycji: ");
+    							int id = EasyIn.getInt();
+    							System.out.println("Podaj nowa nazwe plci: ");
+    							String name = EasyIn.getString();
+    							
+    							statement.setString(1,name);
+    							statement.setInt(2, id);
+    							if(statement.executeUpdate()>=1)	{
+    			    				System.out.println("Edytowano plec o id "+id+" na nazwe: "+name+".");
+    			    			} 
+    			    			else	{
+    			    				System.out.println("Prosze podac dane do edycji");
+    			    			}
+    							
+    						} catch (SQLException e) {
+    						
+    							e.printStackTrace();
+    						}
+    	              		 break;
+   	              	 }
+    	              	 }
+    	                     break;}
+    	            case 4:  opcjaString = "Delete";{
+    	            	System.out.println("Wpisz 1 aby usunac rekord w tabeli Horse.");
+    	              	System.out.println("Wpisz 2 aby usunac rekord w tabeli Breeder.");
+    	              	System.out.println("Wpisz 3 aby usunac rekord w tabeli Country.");
+    	              	System.out.println("Wpisz 4 aby usunac rekord w tabeli Color.");
+    	              	System.out.println("Wpisz 5 aby usunac rekord w tabeli Sex.");
+    	              	int opcja3 = EasyIn.getInt();
+    	              	switch(opcja3) {
+   	              	 case 1: opcja1String = "Horse";{
+   	              	try {
+   	             		query = "DELETE FROM HORSE WHERE ID=(?)";
+						statement = con.prepareStatement(query);
+						System.out.println("Podaj ID konia do usuniecia");
+						int id = EasyIn.getInt();
+						statement.setInt(1,id);
+						if(statement.executeUpdate()>=1)	{
+		    				System.out.println("Usunieto konia o id "+id+"");
+		    			} 
+		    			else	{
+		    				System.out.println("Prosze podac dane do usuniecia");
+		    			}
+					} catch (SQLException e) {
+
+						e.printStackTrace();
+					}
+   	              		 break;
+   	              	 }
+   	              	case 2: opcja1String = "Breeder";{
+   	              		
+   	             	try {
+   	             		query = "DELETE FROM BREEDER WHERE ID=(?)";
+						statement = con.prepareStatement(query);
+						System.out.println("Podaj ID hodowcy do usuniecia");
+						int id = EasyIn.getInt();
+						statement.setInt(1,id);
+						if(statement.executeUpdate()>=1)	{
+		    				System.out.println("Usunieto hodowce o id "+id+"");
+		    			} 
+		    			else	{
+		    				System.out.println("Prosze podac dane do usuniecia");
+		    			}
+					} catch (SQLException e) {
+
+						e.printStackTrace();
+					}
+  	              		 break;
+  	              	 }
+   	              	case 3: opcja1String = "Country";{
+   	             	try {
+   	             		query = "DELETE FROM Country WHERE ID=(?)";
+						statement = con.prepareStatement(query);
+						System.out.println("Podaj ID kraju do usuniecia");
+						int id = EasyIn.getInt();
+						statement.setInt(1,id);
+						if(statement.executeUpdate()>=1)	{
+		    				System.out.println("Usunieto kraj o id "+id+"");
+		    			} 
+		    			else	{
+		    				System.out.println("Prosze podac dane do usuniecia");
+		    			}
+					} catch (SQLException e) {
+
+						e.printStackTrace();
+					}
+  	              		 break;
+  	              	 }
+   	              	case 4: opcja1String = "Color";{
+   	             	try {
+   	             		query = "DELETE FROM COLOR WHERE ID=(?)";
+						statement = con.prepareStatement(query);
+						System.out.println("Podaj ID coloru do usuniecia");
+						int id = EasyIn.getInt();
+						statement.setInt(1,id);
+						if(statement.executeUpdate()>=1)	{
+		    				System.out.println("Usunieto kolor o id "+id+"");
+		    			} 
+		    			else	{
+		    				System.out.println("Prosze podac dane do usuniecia");
+		    			}
+					} catch (SQLException e) {
+
+						e.printStackTrace();
+					}
+  	              		 break;
+  	              	 }
+   	              	case 5: opcja1String = "Sex";{
+   	             	try {
+   	             		query = "DELETE FROM SEX WHERE ID=(?)";
+						statement = con.prepareStatement(query);
+						System.out.println("Podaj ID plci do usuniecia");
+						int id = EasyIn.getInt();
+						statement.setInt(1,id);
+						if(statement.executeUpdate()>=1)	{
+		    				System.out.println("Usunieto plec o id "+id+"");
+		    			} 
+		    			else	{
+		    				System.out.println("Prosze podac dane do usuniecia");
+		    			}
+					} catch (SQLException e) {
+
+						e.printStackTrace();
+					}
+  	              		 break;
+  	              	 }
+   	              	 }
+    	            
+    	                     break;}
     	            case 5:  opcjaString = "exit";{
     	            	System.exit(0);
     	            
@@ -203,7 +435,5 @@ public class Main {
     	   System.out.println("Ahoj!");     
         
     }
-    	
-    	
-    	
+    	  	
 }

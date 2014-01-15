@@ -130,6 +130,7 @@ public static void disconnectDB(){
     	              	   
     	              	 
     	              	case 2: opcja1String = "Horse";{
+    	              		znajdzPotomstwo();
     	              		
    	              		 break;}
    	              	 
@@ -698,6 +699,28 @@ public static void disconnectDB(){
 		}
 
 	}
+	
+	public static void znajdzPotomstwo(){
+		
+		try {
+			System.out.println("Podaj ID Konia");
+			int id = EasyIn.getInt();
+		query = "SELECT * FROM HORSE WHERE HORSE.SIRE=" + id;
+			
+			statement.setInt(1,id);
+				ResultSet rs = statement.executeQuery(query);
+			while(rs.next());{
+				rs.getString("NAME");
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
 }
 	
 

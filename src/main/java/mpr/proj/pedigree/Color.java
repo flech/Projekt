@@ -11,6 +11,7 @@ public class Color {
 		this.lname = lname;
 		this.sname = sname;
 	}
+	
 
 	public void setLname(String lname) {
 		this.lname = lname;

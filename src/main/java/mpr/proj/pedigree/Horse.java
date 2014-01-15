@@ -11,7 +11,7 @@ public class Horse {
     private Horse dam;
     private Breeder breeder;
 
-    public Horse(long id, String name, Sex sex, DateOfBirth dob, Color color, Horse sire, Horse dam, Breeder breder) {
+    public Horse(long id, String name, Sex sex, DateOfBirth dob, Color color, Horse sire, Horse dam, Breeder breeder) {
         this.id = id;
         this.name = name;
         this.sex = sex;

@@ -7,9 +7,9 @@ public class Main {
     public static void main(String[] args) {
     	
     
-    	DBMetodyMenu.connectDB();
-    	DBMetodyMenu.menu();
-    	DBMetodyMenu.disconnectDB();
+    	DBMenu.connectDB();
+    	DBMenu.menu();
+    	DBMenu.disconnectDB();
 
     	   System.out.println("Ahoj!");     
         

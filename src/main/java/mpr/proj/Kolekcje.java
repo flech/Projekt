@@ -45,6 +45,78 @@ public abstract class Kolekcje {
 		};		
 		
 	}
+	
+	public static void wyswietlKonie() {
+
+		try {
+			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			
+				List<Horse> lista = new ArrayList<Horse>();
+		query = "SELECT * FROM HORSE";
+		Statement statement = con.createStatement();
+		ResultSet rs = statement.executeQuery(query);
+			while(rs.next()){
+				lista.add(new Horse(rs.getLong(1), rs.getString(2),DBMetody.IDsex(rs.getInt(3)),new DateOfBirth(rs.getDate("DOB"), rs.getBoolean("YEARONLY")),DBMetody.idKolor(rs.getLong(6)), DBMetody.idKon(rs.getInt(7)), DBMetody.idKon(rs.getInt(8)), DBMetody.idHodowca(rs.getLong(9))));
+			}
+			for (Horse a: lista){
+		System.out.println(a);	}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		};		
+		
+	}
+
+	public static void wyswietlHodowcow()
+	{
+		try {
+			List<Breeder> lista = new ArrayList<Breeder>();
+			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			query = "Select * from BREEDER";
+			Statement statement = con.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+			while (rs.next()){
+				lista.add(new Breeder(rs.getLong(1), rs.getString(2), DBMetody.idKraj(rs.getInt(3))));
+				
+				for (Breeder a : lista){
+					System.out.println(a);
+				}
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void wyswietlPlec()
+	{
+	
+		try {
+			
+			Map<Long, String> lista = new HashMap<Long, String>();
+			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			query = "SELECT * FROM SEX";
+			Statement statement = con.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+			while (rs.next()){
+				lista.put (rs.getLong(1), rs.getString(2));
+				System.out.println("ID: " + rs.getLong(1) + " Plec: " + rs.getString(2));
+			}
+	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	
+	
 	public static void znajdzPotomstwo(){
 		
 		try {
@@ -70,4 +142,19 @@ public abstract class Kolekcje {
 		
 	}
 	
+	public static void rodowod(){	
+	
+		
 }
+
+
+			
+
+		
+
+	}
+	
+
+	
+	
+

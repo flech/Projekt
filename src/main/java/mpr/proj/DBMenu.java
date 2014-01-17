@@ -111,13 +111,14 @@ public static void disconnectDB(){
 		              	System.out.println("Wpisz 5 aby zobaczyc tabele Sex.");
 		              	int opcjaPodglad = EasyIn.getInt();
 		             	 switch(opcjaPodglad) {
-    	              	 case 1: opcja1String = "Horse";{
+    	              	 case 1: opcja1String = "Horse";{	
+    	              		 Kolekcje.wyswietlKonie();
     	              		 break;
     	              	 }
     	              	   
     	              	 
-    	              	case 2: opcja1String = "Horse";{
-    	              		
+    	              	case 2: opcja1String = "Breeder";{
+    	              	Kolekcje.wyswietlHodowcow();
    	              		 break;}
    	              	 
     	              	case 3: opcja1String = "Country";{
@@ -129,7 +130,8 @@ public static void disconnectDB(){
     	              		Kolekcje.wyswietlKolory();
    	              		 break;
    	              	 }
-    	              	case 5: opcja1String = "Horse";{
+    	              	case 5: opcja1String = "Sex";{
+    	              		Kolekcje.wyswietlPlec();
    	              		 break;
    	              	 }
     	              	 }

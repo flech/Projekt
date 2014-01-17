@@ -78,7 +78,11 @@ public class Horse {
     	return breeder;
     }
     
-    
+    @Override
+    public String toString() {
+            return String.format("%4d %30s %8s %10s %8s %30s %30s %30s",this.id,this.name, this.sex.toString(), this.dob.toString(),
+ this.color.getSname(),this.sire != null ? this.sire.getName() : "brak",this.dam != null ? this.dam.getName() : "brak",this.breeder != null ? this.breeder.getName() : "brak");
+    }
 }
    
 

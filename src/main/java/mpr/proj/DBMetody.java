@@ -2,7 +2,12 @@ package mpr.proj;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
+import mpr.proj.pedigree.*;
+
 
 
 public class DBMetody {
@@ -485,4 +490,105 @@ public class DBMetody {
 		}
 
 	}
-}
+	public static Color idKolor(long id)
+	{
+		try {
+			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			
+		query = "SELECT * FROM COLOR where ID =" +id ;
+		Statement statement = con.createStatement();
+		ResultSet rs = statement.executeQuery(query);
+			while(rs.next()){
+				return (new Color(rs.getLong(1), rs.getString(2), rs.getString(3)));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		};		
+		
+		return null;
+	}
+	
+	public static Breeder idHodowca(long id)
+	{
+		try {
+			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			query = "SELECT * FROM Breeder WHERE ID =" + id;
+			Statement statement = con.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+			while (rs.next())
+			{
+				return new Breeder(rs.getLong(1), rs.getString(2), idKraj(rs.getLong(3)));
+			}
+			
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static Country idKraj(long id)
+	{
+		try {
+			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			query = "SELECT * FROM COUNTRY WHERE ID=" +id;
+			Statement statement = con.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+			
+			while(rs.next()){
+				return new Country(rs.getLong(1), rs.getString(2), rs.getString(3));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	public static Horse idKon(long id)
+	{
+		try {
+			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			query = "SELECT * FROM HORSE WHERE ID =" + id;
+			Statement statement = con.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+			while (rs.next())
+			{
+				return new Horse(rs.getLong(1), rs.getString(2),IDsex(rs.getInt(3)),new DateOfBirth(rs.getDate("DOB"), rs.getBoolean("YEARONLY")),DBMetody.idKolor(rs.getLong(6)), DBMetody.idKon(rs.getLong(7)),idKon(rs.getLong(8)) , DBMetody.idHodowca(rs.getLong(9)));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+    public static Sex IDsex(long id){
+    	try {
+			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			query = "SELECT * FROM SEX WHERE ID=" +id;
+			Statement statement = con.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+			while (rs.next())
+			{
+				return Sex.valueOf(rs.getString("NAME").toUpperCase());
+			}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	
+    	
+		return null;
+    	}
+
+    }
+	
+	
+	
+

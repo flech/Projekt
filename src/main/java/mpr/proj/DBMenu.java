@@ -9,6 +9,7 @@ public class DBMenu {
   
 public static void connectDB(){
 	
+	
 	try {
 		
 		Class.forName("org.hsqldb.jdbcDriver");
@@ -44,6 +45,7 @@ public static void disconnectDB(){
 
 
 	public static void menu(){
+		DBMenu.connectDB();
 		
 		try {
 			if(!con.isClosed()){
@@ -238,7 +240,7 @@ public static void disconnectDB(){
 			e.printStackTrace();
 			System.out.println("Nastapil blad przy polaczeniu z baza danych");
 		}
-	}
+		DBMenu.disconnectDB();	}
 	
 	
 	

@@ -574,7 +574,7 @@ public class DBMetody {
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next())
 			{
-				return Sex.valueOf(rs.getString("NAME").toUpperCase());
+				return Sex.valueOf(rs.getString(2).toUpperCase());
 			}
 		
 		} catch (SQLException e) {

@@ -33,7 +33,7 @@ public class Breeder {
     }
     @Override
     public String toString() {
-            return String.format("%4d %60s %30s", this.id, this.name, this.country.getName());
+            return String.format("%5d %20s %20s", this.id, this.name, this.country.getName());
     }
 
 

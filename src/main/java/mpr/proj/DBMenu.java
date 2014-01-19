@@ -144,7 +144,7 @@ public static void disconnectDB(){
 			              	System.out.println("Wpisz 2 aby uaktualnic rekord w tabeli Breeder.");
 			              	System.out.println("Wpisz 3 aby uaktualnic rekord w tabeli Country.");
 			              	System.out.println("Wpisz 4 aby uaktualnic rekord w tabeli Color.");
-			              	System.out.println("Wpisz 5 aby uaktualnic rekord w tabeli Sex.");
+			              	//System.out.println("Wpisz 5 aby uaktualnic rekord w tabeli Sex.");
 			              	int opcja2 = EasyIn.getInt();
 			              	switch(opcja2) {
 			              	 case 1: opcja1String = "Horse";{
@@ -176,7 +176,7 @@ public static void disconnectDB(){
 			              	System.out.println("Wpisz 2 aby usunac rekord w tabeli Breeder.");
 			              	System.out.println("Wpisz 3 aby usunac rekord w tabeli Country.");
 			              	System.out.println("Wpisz 4 aby usunac rekord w tabeli Color.");
-			              	System.out.println("Wpisz 5 aby usunac rekord w tabeli Sex.");
+			              //	System.out.println("Wpisz 5 aby usunac rekord w tabeli Sex.");
 			              	int opcja3 = EasyIn.getInt();
 			              	switch(opcja3) {
 			          	 case 1: opcja1String = "Horse";{

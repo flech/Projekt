@@ -27,7 +27,7 @@ public class Country {
     }
     @Override
   	public String toString()	{
-  		return String.format("%4d %30s %16s", this.id, this.name, this.code);
+  		return String.format("%4d %20s %4s", this.id, this.name, this.code);
   	}
 
     @Override

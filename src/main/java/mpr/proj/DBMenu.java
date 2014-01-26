@@ -1,6 +1,9 @@
 package mpr.proj;
 import java.sql.*;
+import java.text.ParseException;
 import java.util.*;
+
+import mpr.proj.pedigree.Horse;
 
 public class DBMenu {
 	private static Connection con;
@@ -44,7 +47,7 @@ public static void disconnectDB(){
 }
 
 
-	public static void menu(){
+	public static void menu() throws ParseException{
 		DBMenu.connectDB();
 		
 		try {
@@ -98,7 +101,7 @@ public static void disconnectDB(){
 			              	
 			              	
 			              	case 5: opcja1String = "Sex";{
-			              		DBMetody.dodajPlec();
+			              	
 			              		break;
 			              		
 			              		}

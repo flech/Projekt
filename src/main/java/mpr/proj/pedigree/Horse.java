@@ -1,5 +1,7 @@
 package mpr.proj.pedigree;
 
+import mpr.proj.DBMetody;
+
 public class Horse {
 
     private long id;
@@ -63,7 +65,7 @@ public class Horse {
     }
     
     public void setDam(Horse dam) {
-    	this.sire = dam;
+    	this.dam = dam;
     }
 
     public Horse getDam() {
@@ -78,9 +80,14 @@ public class Horse {
     	return breeder;
     }
     
+    
+    
+    
+    
+    
     @Override
     public String toString() {
-            return String.format("%5d %10s %10s %10s %10s %30s %30s %30s",this.id,this.name, this.sex.toString(), this.dob.toString(),
+            return String.format("%5d %10s %10s %10s %10s %10s %10s %10s",this.id,this.name, this.sex.toString(), this.dob.toString(),
  this.color.getSname(),this.sire != null ? this.sire.getName() : "brak",this.dam != null ? this.dam.getName() : "brak",this.breeder != null ? this.breeder.getName() : "brak");
     }
 }

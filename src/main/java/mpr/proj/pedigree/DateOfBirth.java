@@ -16,6 +16,9 @@ public class DateOfBirth {
     	this.yearOnly = yearOnly;
     }
 
+    public String getData(){
+    	 return new SimpleDateFormat("yyyy-MM-dd").format(date);
+    }
 
     public String getDate() {
         if (yearOnly) {

@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import mpr.proj.pedigree.*;
 
@@ -77,7 +80,7 @@ public class DBMetody {
 			e.printStackTrace();
 		}
 	}
-	public static void dodajKonia() {
+	public static void dodajKonia() throws ParseException {
 		 System.out.println("Czy wprowadzany kon posiada rodzicow w bazie danych(dla 'tak' wprowadz 1, dla 'nie' 0) ?");
   		 int odp = EasyIn.getInt();
   		if (odp == 1){
@@ -86,22 +89,76 @@ public class DBMetody {
           		 query = "INSERT INTO HORSE (NAME, SEX, COLOR, DOB, YEARONLY,DAM,SIRE,BREEDER) VALUES (?,?,?,?,?,?,?,?)";
 				statement = con.prepareStatement(query);
 				
+				
+				System.out.print("Podaj date urodzenia konia do dodania w formacie RRRR-MM-DD: ");
+				String date = EasyIn.getString();
+				
+				
+				
+				
+					System.out.print("Podaj id matki konia do dodania: ");
+    			int iddam = EasyIn.getInt();
+    			   if (idKon(iddam).getSex() != Sex.MARE){
+    			   System.out.println("Matka konia musi byc klacza!");
+    			   DBMenu.disconnectDB();
+    			   System.exit(0);
+    			   
+    		   }
+    			
+    			
+    		   String datedam = idKon(iddam).getDob().getData();
+    		   SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    		   Date date1 = format.parse(datedam);
+    		   Date date2 = format.parse(date);
+    		   long roznica = (date2.getTime() - date1.getTime()) / 86400000;
+    		   if (roznica < 1095){
+    			   System.out.println ("Matka musi byc starsza o conajmniej 3 lata !");
+    			   DBMenu.disconnectDB();
+    			   System.exit(0);
+    		   }
+    		   if (roznica > 10950 ){
+    			   System.out.println ("Matka nie moze byc starsza niz 30 lat !");
+    			   DBMenu.disconnectDB();
+    			   System.exit(0);
+    		   }
+    		    				
+    			System.out.print("Podaj id ojca konia do dodania: ");
+    			int idsire = EasyIn.getInt();
+    			if (idKon(idsire).getSex() != Sex.STALLION )
+    			{
+    				System.out.println("Ojciec musi byc ogierem");
+    				DBMenu.disconnectDB();
+    				System.exit(0);
+    			}
+
+     		   String datesire = idKon(idsire).getDob().getData();
+     		   Date date3 = format.parse(datesire);
+     		   long roznica1 = (date2.getTime() - date3.getTime()) / 86400000;
+     		   if (roznica1 < 730){
+     			   System.out.println ("Ojciec musi byc starsza o conajmniej 2 lata !");
+     			   DBMenu.disconnectDB();
+     			   System.exit(0);
+     		   }
+     		   if (roznica1 > 10950 ){
+     			   System.out.println ("Ojciec nie moze byc starsza niz 30 lat !");
+     			   DBMenu.disconnectDB();
+     			   System.exit(0);
+     		   }
+    			
+    			
+				
     			System.out.print("Podaj imie konia do dodania: ");
     			String name = EasyIn.getString();
     			System.out.print("Podaj id plci konia do dodania(mare=0,stallion=1,gelding=2): ");
     			int idsex = EasyIn.getInt();
     			System.out.print("Podaj id koloru konia do dodania: ");
     			int idcolor = EasyIn.getInt();
-    			System.out.print("Podaj date urodzenia konia do dodania w formacie RRRR-MM-DD: ");
-    			String date = EasyIn.getString();
+    	
     			System.out.print("Podaj czy tylko rok (tak=1, nie=0): ");
     			int year  = EasyIn.getInt();
     			System.out.print("Podaj id hodowcy konia do dodania: ");
     			int breeder = EasyIn.getInt();
-    			System.out.print("Podaj id matki konia do dodania: ");
-    			int iddam = EasyIn.getInt();
-    			System.out.print("Podaj id ojca konia do dodania: ");
-    			int idsire = EasyIn.getInt();
+    		
     			
     			statement.setString(1, name);
     			statement.setInt(2, idsex);
@@ -119,10 +176,10 @@ public class DBMetody {
     				System.out.println("Prosze podac poprawne dane!");
     			}    	              		 
 
-          		 
-          		 } 		catch (SQLException e) {
+    		   }
+          		  		catch (SQLException e) {
                      e.printStackTrace();
-          		 }
+          		 } 
   		}
   		else if (odp ==0) {
   	
@@ -234,7 +291,7 @@ public class DBMetody {
             }	
 		
 	}
-	public static void editKonia(){
+	public static void editKonia() throws ParseException{
 		 System.out.println("Czy edytowany kon posiada rodzicow w bazie danych(dla 'tak' wprowadz 1, dla 'nie' 0) ?");
   		 int odp = EasyIn.getInt();
   		if (odp == 1){
@@ -259,8 +316,48 @@ public class DBMetody {
     			int breeder = EasyIn.getInt();
     			System.out.print("Podaj nowe id matki konia: ");
     			int iddam = EasyIn.getInt();
+    			   if (idKon(iddam).getSex() != Sex.MARE){
+        			   System.out.println("Matka konia musi byc klacza!");
+        			   DBMenu.disconnectDB();
+        			   System.exit(0); 
+        		   }
+    			   String datedam = idKon(iddam).getDob().getData();
+        		   SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        		   Date date1 = format.parse(datedam);
+        		   Date date2 = format.parse(date);
+        		   long roznica = (date2.getTime() - date1.getTime()) / 86400000;
+        		   if (roznica < 1095){
+        			   System.out.println ("Matka musi byc starsza o conajmniej 3 lata !");
+        			   DBMenu.disconnectDB();
+        			   System.exit(0);
+        		   }
+        		   if (roznica > 10950 ){
+        			   System.out.println ("Matka nie moze byc starsza niz 30 lat !");
+        			   DBMenu.disconnectDB();
+        			   System.exit(0);
+        		   }
     			System.out.print("Podaj nowe id ojca konia: ");
     			int idsire = EasyIn.getInt();
+    			if (idKon(idsire).getSex() != Sex.STALLION )
+    			{
+    				System.out.println("Ojciec musi byc ogierem");
+    				DBMenu.disconnectDB();
+    				System.exit(0);
+    			}
+    			String datesire = idKon(idsire).getDob().getData();
+      		   Date date3 = format.parse(datesire);
+      		   long roznica1 = (date2.getTime() - date3.getTime()) / 86400000;
+      		   if (roznica1 < 730){
+      			   System.out.println ("Ojciec musi byc starsza o conajmniej 2 lata !");
+      			   DBMenu.disconnectDB();
+      			   System.exit(0);
+      		   }
+      		   if (roznica1 > 10950 ){
+      			   System.out.println ("Ojciec nie moze byc starsza niz 30 lat !");
+      			   DBMenu.disconnectDB();
+      			   System.exit(0);
+      		   }
+     			
     			
     			statement.setString(1, name);
     			statement.setInt(2, idsex);
@@ -586,6 +683,10 @@ public class DBMetody {
     	
 		return null;
     	}
+    
+ 
+    
+    
 
     }
 	

@@ -19,14 +19,14 @@ public class DateOfBirth {
     public String getData(){
     	 return new SimpleDateFormat("yyyy-MM-dd").format(date);
     }
-
+/*
     public String getDate() {
         if (yearOnly) {
             return "2013";
         } else {
             return "2013-12-14";
         }
-    }
+    } */
     @Override
     public String toString() {
 	    if(yearOnly) {

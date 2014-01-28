@@ -60,7 +60,8 @@ public static void disconnectDB(){
 			System.out.println("Wpisz 3 aby uaktualnic rekord.");
 			System.out.println("Wpisz 4 aby usunac rekord.");
 			System.out.println("Wpisz 5 aby znalesc potomstwo konia");
-			System.out.println("Wpisz 6 aby Wyjsc.");
+			System.out.println("Wpisz 6 aby wyswietlic rodowod konia");
+			System.out.println("Wpisz 7 aby Wyjsc.");
      
 				 int opcja = EasyIn.getInt();
 			       String opcjaString; 
@@ -216,7 +217,11 @@ public static void disconnectDB(){
 			            }
 			            
 			            
-			            case 6:  opcjaString = "exit";{
+			            case 6: opcjaString = "rodowod";{
+			            	Kolekcje.rodowod();
+			            }
+			            
+			            case 7:  opcjaString = "exit";{
 			            	
 				            	try {
 				            		if(!con.isClosed()){

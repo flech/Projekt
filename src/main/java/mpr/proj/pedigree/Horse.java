@@ -56,6 +56,15 @@ public class Horse {
     public Color getColor() {
 	return color;
     }
+    public void setId(Long id) {
+    	this.id = id;
+    }
+    
+    public long getId() {
+    	return id;
+        }
+    
+    
     public void setSire(Horse sire) {
     	this.sire = sire;
     }

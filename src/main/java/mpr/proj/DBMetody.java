@@ -654,7 +654,7 @@ public class DBMetody {
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next())
 			{
-				return new Horse(rs.getLong(1), rs.getString(2),IDsex(rs.getInt(3)),new DateOfBirth(rs.getDate("DOB"), rs.getBoolean("YEARONLY")),DBMetody.idKolor(rs.getLong(6)), DBMetody.idKon(rs.getLong(7)),idKon(rs.getLong(8)) , DBMetody.idHodowca(rs.getLong(9)));
+				return new Horse(rs.getLong(1), rs.getString(2),IDsex(rs.getInt(3)),new DateOfBirth(rs.getDate("DOB"), rs.getBoolean("YEARONLY")),DBMetody.idKolor(rs.getLong(6)), DBMetody.idKon(rs.getLong(8)),idKon(rs.getLong(7)) , DBMetody.idHodowca(rs.getLong(9)));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

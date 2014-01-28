@@ -141,9 +141,28 @@ public abstract class Kolekcje {
 		}
 		
 	}
-	
+
+		
 	public static void rodowod(){	
-	
+		System.out.println("Podaj id konia, ktorego rodowod chcesz wyswietlic:");
+		int id = EasyIn.getInt();
+		System.out.println("Podaj glebokosc rodowodu:");
+		int glebokosc = EasyIn.getInt();
+			Horse kon = DBMetody.idKon(id);
+		System.out.println("Rodowod konia o imieniu "+ kon.getName());
+		int i;
+
+		for (i=1 ; i<=glebokosc ; i++){
+			System.out.println ("Meski przodek o glebokosci " + i);
+			System.out.println (kon.getSire().getName());
+			kon = kon.getSire();
+		}
+		kon = DBMetody.idKon(id);
+		for (i=1 ; i<=glebokosc ; i++){
+			System.out.println ("Zenski przodek o glebokosci " + i);
+			System.out.println (kon.getDam().getName());
+			kon = kon.getDam();
+		}
 		
 }
 

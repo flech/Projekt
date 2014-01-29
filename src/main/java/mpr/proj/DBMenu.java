@@ -218,7 +218,15 @@ public static void disconnectDB(){
 			            
 			            
 			            case 6: opcjaString = "rodowod";{
-			            	Kolekcje.rodowod();
+			        		System.out.println("Podaj id konia, ktorego rodowod chcesz wyswietlic:");
+			        		int id = EasyIn.getInt();
+			        		Horse Horsemania = DBMetody.idKon(id);
+			        		System.out.println("Podaj glebokosc rodowodu:");
+			        		int glebokosci = EasyIn.getInt();
+			            	
+			            	
+			            	
+			            	Kolekcje.rodowodo(Horsemania, glebokosci);
 			            }
 			            
 			            case 7:  opcjaString = "exit";{

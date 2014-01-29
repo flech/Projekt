@@ -1,4 +1,4 @@
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>mpr.proj</groupId>
     <artifactId>pedigreeDb</artifactId>
@@ -40,9 +40,18 @@
             <artifactId>hsqldb</artifactId>
             <version>2.3.1</version>
             <type>jar</type>
-
             <scope>compile</scope>
         </dependency>
+<dependency>
+	<groupId>com.itextpdf</groupId>
+	<artifactId>itextpdf</artifactId>
+	<version>5.4.5</version>
+</dependency>
+<dependency>
+	<groupId>junit</groupId>
+	<artifactId>junit</artifactId>
+	<version>4.11</version>
+</dependency>
     </dependencies>
 
 </project>

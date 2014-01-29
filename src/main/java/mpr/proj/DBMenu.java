@@ -239,9 +239,9 @@ public static void disconnectDB(){
 				            	try {
 				            		if(!con.isClosed()){
 				            			con.close();
-				            			System.out.println("Polaczenie z baza danych zostalo pomyslnie zamniete");
+				            			System.out.println("Polaczenie z baza danych zostalo pomyslnie zamkniete");
 				            		}
-				            		else {System.out.println("Polaczenie z baza danych zostalo pomyslnie zamniete");
+				            		else {System.out.println("Polaczenie z baza danych zostalo pomyslnie zamkniete");
 				            		}
 				            	} catch (SQLException e) {
 				            		e.printStackTrace();

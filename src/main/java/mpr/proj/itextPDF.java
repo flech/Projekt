@@ -65,12 +65,12 @@ public abstract class itextPDF {
 			if(horse.getSire() != null){
 				int iterator = glebokosc;
 			subPara.add(new Paragraph("Ojciec konia "+horse.getName() + " ---> " + horse.getSire().getName()));
-					rodowodoPDF(horse.getSire(), iterator -=1);
+					rodowodoPDF(document,horse.getSire(), iterator -=1);
 			}else System.out.println ("Brak ojca w bazie danych.");
 			
 			if(horse.getDam() != null){
 				subPara.add("Matka konia "+horse.getName() + " ---> " + horse.getDam().getName());
-					rodowodoPDF(horse.getDam(), glebokosc -=1);
+					rodowodoPDF(document,horse.getDam(), glebokosc -=1);
 			}else System.out.println ("Brak ojca w bazie danych.");
 		}
 	    
@@ -111,18 +111,20 @@ public abstract class itextPDF {
 	    document.add(subPara);
 
 	  }
-	  public static void rodowodoPDF(Horse horse,int glebokosc){
+	  public static void rodowodoPDF(Document document,Horse horse,int glebokosc) throws DocumentException{
 		  Paragraph subPara = new Paragraph();
 			if(glebokosc > 0){
 				if(horse.getSire() != null){
 					int iterator = glebokosc;
 				subPara.add(new Paragraph("Ojciec konia "+horse.getName() + " ---> " + horse.getSire().getName()));
-						rodowodoPDF(horse.getSire(), iterator -=1);
+				document.add(subPara);
+						rodowodoPDF(document,horse.getSire(), iterator -=1);
 				}else System.out.println ("Brak ojca w bazie danych.");
 				
 				if(horse.getDam() != null){
 					subPara.add("Matka konia "+horse.getName() + " ---> " + horse.getDam().getName());
-						rodowodoPDF(horse.getDam(), glebokosc -=1);
+					document.add(subPara);
+						rodowodoPDF(document,horse.getDam(), glebokosc -=1);
 				}else System.out.println ("Brak ojca w bazie danych.");
 			}
 			

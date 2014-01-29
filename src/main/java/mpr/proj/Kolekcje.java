@@ -142,63 +142,19 @@ public abstract class Kolekcje {
 		
 	}
 
-		/*
-	public static void rodowod(){	
-		System.out.println("Podaj id konia, ktorego rodowod chcesz wyswietlic:");
-		int id = EasyIn.getInt();
-		System.out.println("Podaj glebokosc rodowodu:");
-		int glebokosc = EasyIn.getInt();
-			Horse kon = DBMetody.idKon(id);
-		System.out.println("Rodowod konia o imieniu "+ kon.getName());
-
-		if (glebokosc == 1){
-			if (kon.getSire() != null){
-				System.out.println ("Ojciec konia ");
-				System.out.println (kon.getSire().getName());
-		}else System.out.println ("Brak ojca w bazie danych");
-			if (kon.getDam() != null){
-			System.out.println ("Matka konia ");
-			System.out.println (kon.getDam().getName());
-			}else System.out.println("Brak matki w bazie danych");
-		}else if(glebokosc > 1){
-			
-		}
-			for (int i=1 ; i<=glebokosc ; i++){
-				if (kon.getSire() != null){
-				System.out.println ("Meski przodek o glebokosci " + i);
-				System.out.println (kon.getSire().getName());
-				kon = kon.getSire();
-				}else break;
-				
-			}
-			kon = DBMetody.idKon(id);
-			for (int i=1 ; i<=glebokosc ; i++){
-				if (kon.getDam() != null ){
-				System.out.println ("Zenski przodek o glebokosci " + i);
-				System.out.println (kon.getDam().getName());
-				kon = kon.getDam();
-			}
-			else break;	
-		}
-
-
-		}*/
+		
 	
 		public static void rodowodo(Horse horse,int glebokosc){
 			if(glebokosc > 0){
 				if(horse.getSire() != null){
 					int iterator = glebokosc;
-					for(int i = 0 ; i <= iterator ; i++){
 						System.out.println("Ojciec konia "+horse.getName() + " ---> " + horse.getSire().getName());
 						rodowodo(horse.getSire(), iterator -=1);
-					}
 				}else System.out.println ("Brak ojca w bazie danych.");
 				
 				if(horse.getDam() != null){
-					for(int i = 0 ; i <= glebokosc ; i++){
 						System.out.println("Matka konia "+horse.getName() + " ---> " + horse.getDam().getName());
 						rodowodo(horse.getDam(), glebokosc -=1);
-					}
 				}else System.out.println ("Brak ojca w bazie danych.");
 			}
 			

@@ -61,7 +61,8 @@ public static void disconnectDB(){
 			System.out.println("Wpisz 4 aby usunac rekord.");
 			System.out.println("Wpisz 5 aby znalesc potomstwo konia");
 			System.out.println("Wpisz 6 aby wyswietlic rodowod konia");
-			System.out.println("Wpisz 7 aby Wyjsc.");
+			System.out.println("Wpisz 7 aby zapisac rodowod konia do pliku .pdf.");
+			System.out.println("Wpisz 8 aby Wyjsc.");
      
 				 int opcja = EasyIn.getInt();
 			       String opcjaString; 
@@ -223,13 +224,17 @@ public static void disconnectDB(){
 			        		Horse Horsemania = DBMetody.idKon(id);
 			        		System.out.println("Podaj glebokosc rodowodu:");
 			        		int glebokosci = EasyIn.getInt();
-			            	
-			            	
-			            	
+			        		System.out.println("Rodowod konia o imieniu: "+ Horsemania.getName());
 			            	Kolekcje.rodowodo(Horsemania, glebokosci);
+			            	break;
 			            }
 			            
-			            case 7:  opcjaString = "exit";{
+			            case 7: opcjaString = "rodowodpdf";{
+			            	itextPDF.createPDF();
+			            }
+			            
+			            
+			            case 8:  opcjaString = "exit";{
 			            	
 				            	try {
 				            		if(!con.isClosed()){

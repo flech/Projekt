@@ -44,6 +44,7 @@ public abstract class itextPDF {
 	    System.out.println("Podaj glebokosc rodowodu.");
 	      int glebokosc = EasyIn.getInt();
 	    Paragraph subPara = new Paragraph("Rodowod konia o imieniu "+ horse.getName());
+	    document.add(subPara);
 	    
 	    if(glebokosc > 0){
 			if(horse.getSire() != null){

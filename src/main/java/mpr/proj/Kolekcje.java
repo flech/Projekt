@@ -8,10 +8,13 @@ import mpr.proj.pedigree.*;
 public abstract class Kolekcje {
 	static	Connection con;
 	static String query;
+	public static void getConnection(Connection connect){
+		con = connect;
+	}
 	public static  void wyswietlKraje() {
 	
 		try {
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+		//	con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
 				List<Country> lista = new ArrayList<Country>();
 		query = "SELECT * FROM COUNTRY";
 		Statement statement = con.createStatement();
@@ -29,7 +32,7 @@ public abstract class Kolekcje {
 	public static void wyswietlKolory() {
 
 		try {
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			//con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
 			
 				List<Color> lista = new ArrayList<Color>();
 		query = "SELECT * FROM COLOR";
@@ -49,7 +52,7 @@ public abstract class Kolekcje {
 	public static void wyswietlKonie() {
 
 		try {
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			//con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
 			
 				List<Horse> lista = new ArrayList<Horse>();
 		query = "SELECT * FROM HORSE";
@@ -70,7 +73,7 @@ public abstract class Kolekcje {
 	{
 		try {
 			List<Breeder> lista = new ArrayList<Breeder>();
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+		//	con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
 			query = "Select * from BREEDER";
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(query);
@@ -97,7 +100,7 @@ public abstract class Kolekcje {
 		try {
 			
 			Map<Long, String> lista = new HashMap<Long, String>();
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			//con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
 			query = "SELECT * FROM SEX";
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(query);
@@ -120,7 +123,7 @@ public abstract class Kolekcje {
 	public static void znajdzPotomstwo(){
 		
 		try {
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			//con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
 			List<String> lista = new ArrayList<String>();
 					System.out.println("Podaj ID Konia, ktorego potomstwo chcesz znalesc:");
 			int id = EasyIn.getInt();

@@ -17,6 +17,9 @@ public class DBMetody {
 	private static Connection con;
 	private static String query;
     private static PreparedStatement statement;
+    public static void getConnection(Connection connect){
+    	con = connect;
+    }
 	public static void dodajPlec(){
 		try{
 			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
@@ -36,6 +39,19 @@ public class DBMetody {
                     e.printStackTrace();
             }
 	}
+	
+	
+	public static int addplec(String wybor){
+		switch (wybor)
+		{
+		case "MARE":{return 0;}
+		case "STALLION":{return 1;}
+		case "GELDING":{return 2;}
+		}
+		return 0;	
+	}
+	
+	
 	public static void editPlec(){
 		try {
 			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
@@ -85,7 +101,7 @@ public class DBMetody {
   		 int odp = EasyIn.getInt();
   		if (odp == 1){
   			try {     
-  				con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+  				//con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
           		 query = "INSERT INTO HORSE (NAME, SEX, COLOR, DOB, YEARONLY,DAM,SIRE,BREEDER) VALUES (?,?,?,?,?,?,?,?)";
 				statement = con.prepareStatement(query);
 				
@@ -107,7 +123,7 @@ public class DBMetody {
     			
     			
     		   String datedam = idKon(iddam).getDob().getData();
-    		   SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    		  SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     		   Date date1 = format.parse(datedam);
     		   Date date2 = format.parse(date);
     		   long roznica = (date2.getTime() - date1.getTime()) / 86400000;
@@ -149,8 +165,9 @@ public class DBMetody {
 				
     			System.out.print("Podaj imie konia do dodania: ");
     			String name = EasyIn.getString();
-    			System.out.print("Podaj id plci konia do dodania(mare=0,stallion=1,gelding=2): ");
-    			int idsex = EasyIn.getInt();
+    			System.out.print("Podaj plec konia do dodania(MARE,STALLION,GELDING): ");
+    			
+    			int idsex = addplec(EasyIn.getString());
     			System.out.print("Podaj id koloru konia do dodania: ");
     			int idcolor = EasyIn.getInt();
     	
@@ -184,7 +201,7 @@ public class DBMetody {
   		else if (odp ==0) {
   	
 		try {     
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			//con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
   		 query = "INSERT INTO HORSE (NAME, SEX, COLOR, DOB, YEARONLY,BREEDER) VALUES (?,?,?,?,?,?)";
 		statement = con.prepareStatement(query);
 		
@@ -221,7 +238,7 @@ public class DBMetody {
 	}
 	public static void dodajHodowce() {
 		try{
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			//con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
      		 query = "INSERT INTO Breeder (NAME, COUNTRY) VALUES (?,?)";
 			statement = con.prepareStatement(query);
 			System.out.print("Podaj imie hodowcy: ");
@@ -245,7 +262,7 @@ public class DBMetody {
 	}
 	public static void dodajKraj(){
 		try{
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			//con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
           	query = "INSERT INTO Country (NAME,CODE) VALUES (?,?)";
           	statement = con.prepareStatement(query);
           	System.out.println("Podaj nazwe panstwa: ");
@@ -271,7 +288,7 @@ public class DBMetody {
 	}
 	public static void dodajKolor(){
 		try{
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			//con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
           	query = "INSERT INTO Color (LNAME,SNAME) VALUES (?,?)";
           	statement = con.prepareStatement(query);
           	System.out.println("Podaj dluga nazwe umaszczenia: ");
@@ -296,7 +313,7 @@ public class DBMetody {
   		 int odp = EasyIn.getInt();
   		if (odp == 1){
   			try {     
-  				con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+  				//con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
           		 query = "UPDATE HORSE SET NAME=(?), SEX=(?), COLOR=(?), DOB=(?), YEARONLY=(?), DAM=(?), SIRE=(?), BREEDER=(?) WHERE ID=(?)";
 				statement = con.prepareStatement(query);
 				System.out.println("Podaj id konia do edycji: ");
@@ -383,7 +400,7 @@ public class DBMetody {
   		else if (odp ==0) {
   	
 		try {     
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			//con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
 			query = "UPDATE HORSE SET NAME=(?), SEX=(?), COLOR=(?), DOB=(?), YEARONLY=(?), BREEDER=(?) WHERE ID=(?)";
 			statement = con.prepareStatement(query);
 			System.out.println("Podaj id konia do edycji: ");
@@ -425,7 +442,7 @@ public class DBMetody {
 	public static void editHodowce() {
 
 		try {
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+//			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
       		query ="UPDATE Breeder SET NAME=(?), COUNTRY=(?) WHERE ID=(?)";
 			statement = con.prepareStatement(query);
 			System.out.println("Podaj ID hodowcy do edycji: ");
@@ -455,7 +472,7 @@ public class DBMetody {
 	public static void editKraj(){
 
  		try {
- 			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+ //			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
       		query ="UPDATE Country SET NAME=(?), CODE=(?) WHERE ID=(?)";
 			statement = con.prepareStatement(query);
 			System.out.println("Podaj ID panstwa do edycji: ");
@@ -482,7 +499,7 @@ public class DBMetody {
 	}
 	public static void editKolor(){
 		try {
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+	//		con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
       		query ="UPDATE Color SET LNAME=(?), SNAME=(?) WHERE ID=(?)";
 			statement = con.prepareStatement(query);
 			System.out.println("Podaj ID koloru do edycji: ");
@@ -509,7 +526,7 @@ public class DBMetody {
 	}
 	public static void usunKonia(){
 	   	try {
-	   		con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+	  // 		con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
      		query = "DELETE FROM HORSE WHERE ID=(?)";
 			statement = con.prepareStatement(query);
 			System.out.println("Podaj ID konia do usuniecia");
@@ -530,7 +547,7 @@ public class DBMetody {
 
 		
      	try {
-     		con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+     	//	con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
      		query = "DELETE FROM BREEDER WHERE ID=(?)";
 			statement = con.prepareStatement(query);
 			System.out.println("Podaj ID hodowcy do usuniecia");
@@ -550,7 +567,7 @@ public class DBMetody {
 	}
 	public static void usunKraj(){
 		try {
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			//con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
      		query = "DELETE FROM Country WHERE ID=(?)";
 			statement = con.prepareStatement(query);
 			System.out.println("Podaj ID kraju do usuniecia");
@@ -569,7 +586,7 @@ public class DBMetody {
 	}
 	public static void usunKolor(){
 		try {
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+		//	con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
      		query = "DELETE FROM COLOR WHERE ID=(?)";
 			statement = con.prepareStatement(query);
 			System.out.println("Podaj ID coloru do usuniecia");
@@ -590,7 +607,7 @@ public class DBMetody {
 	public static Color idKolor(long id)
 	{
 		try {
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+		//	con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
 			
 		query = "SELECT * FROM COLOR where ID =" +id ;
 		Statement statement = con.createStatement();
@@ -609,7 +626,7 @@ public class DBMetody {
 	public static Breeder idHodowca(long id)
 	{
 		try {
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+		//	con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
 			query = "SELECT * FROM Breeder WHERE ID =" + id;
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(query);
@@ -629,7 +646,7 @@ public class DBMetody {
 	public static Country idKraj(long id)
 	{
 		try {
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+		//	con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
 			query = "SELECT * FROM COUNTRY WHERE ID=" +id;
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(query);
@@ -648,7 +665,7 @@ public class DBMetody {
 	public static Horse idKon(long id)
 	{
 		try {
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			//con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
 			query = "SELECT * FROM HORSE WHERE ID =" + id;
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(query);
@@ -665,7 +682,7 @@ public class DBMetody {
 	}
     public static Sex IDsex(long id){
     	try {
-			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			//con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
 			query = "SELECT * FROM SEX WHERE ID=" +id;
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(query);

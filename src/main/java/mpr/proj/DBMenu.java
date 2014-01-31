@@ -19,7 +19,8 @@ public static void connectDB(){
 		con=DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
 		if(!con.isClosed())	{
 			System.out.println("Nawiazano polaczenie z baza danych.");
-			
+			DBMetody.getConnection(con);
+			Kolekcje.getConnection(con);
 		}
 	}
 	catch (Exception ex) {
@@ -51,7 +52,7 @@ public static void disconnectDB(){
 		DBMenu.connectDB();
 		
 		try {
-			if(!con.isClosed()){
+		while(!con.isClosed()){
 			
 			
 			System.out.println("Witaj w bazie danych konii.");
@@ -231,6 +232,7 @@ public static void disconnectDB(){
 			            
 			            case 7: opcjaString = "rodowodpdf";{
 			            	itextPDF.createPDF();
+			            	break;
 			            }
 			            
 			            

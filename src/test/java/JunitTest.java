@@ -34,6 +34,7 @@ public class JunitTest {
 		assertEquals(tester.getName(), test.getName());
 	}
 
+
 @Test
 public void testPobieranieKon_Rodzice() throws SQLException {
 	Connection con=DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");

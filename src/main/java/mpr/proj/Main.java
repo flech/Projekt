@@ -8,6 +8,7 @@ public class Main {
     	
     	DBMenu.menu();
     	System.out.println("Ahoj!");     
+    	
     }
     	  	
 }

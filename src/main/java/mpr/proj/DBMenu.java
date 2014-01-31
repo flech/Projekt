@@ -21,6 +21,7 @@ public static void connectDB(){
 			System.out.println("Nawiazano polaczenie z baza danych.");
 			DBMetody.getConnection(con);
 			Kolekcje.getConnection(con);
+			
 		}
 	}
 	catch (Exception ex) {

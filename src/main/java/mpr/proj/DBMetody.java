@@ -682,7 +682,7 @@ public class DBMetody {
 	}
     public static Sex IDsex(long id){
     	try {
-			//con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
 			query = "SELECT * FROM SEX WHERE ID=" +id;
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(query);

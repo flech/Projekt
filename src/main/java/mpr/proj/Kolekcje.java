@@ -73,16 +73,16 @@ public abstract class Kolekcje {
 	{
 		try {
 			List<Breeder> lista = new ArrayList<Breeder>();
-		//	con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
+			//con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb","sa","");
 			query = "Select * from BREEDER";
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()){
 				lista.add(new Breeder(rs.getLong(1), rs.getString(2), DBMetody.idKraj(rs.getInt(3))));
 				
-				for (Breeder a : lista){
+				
+				}for (Breeder a : lista){
 					System.out.println(a);
-				}
 				
 			}
 			
